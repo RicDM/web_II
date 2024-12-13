@@ -2,7 +2,7 @@
 
 ## Como levantar o Banco de dados
 ```
-cd .\api
+cd api/
 ```
 ```
 npm i
