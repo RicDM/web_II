@@ -1,0 +1,10 @@
+back
+    crud -> user
+    crud -> rental
+    login
+    permissions
+    upload imagens
+
+front
+    new pages
+
