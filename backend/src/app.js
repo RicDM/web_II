@@ -1,9 +1,9 @@
 import express from "express"
+import { routes } from "./routes/index.js"
+import { main } from "./db/mongodb.js"
+
 const app = express()
-
 app.use(express.json())
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+routes(app)
 
-export { app }
+export { app, main }

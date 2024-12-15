@@ -1,15 +1,15 @@
 import { Router } from "express";
 import { UserController } from "../controllers/user.controllers.js";
 
-const participantRoute = Router()
+const userRoute = Router()
 
-participantRoute.get('/', UserController.readAll)
-participantRoute.get('/:id', UserController.read)
+userRoute.get('/', UserController.readAll)
+userRoute.get('/:id', UserController.read)
 
 //security routes
-participantRoute.get('/rental', UserController.getRental)
-participantRoute.put('/', UserController.updated)
-participantRoute.post('/', UserController.create)
-participantRoute.delete('/', UserController.destroy)
+userRoute.get('/rental', UserController.getRental)
+userRoute.put('/', UserController.updated)
+userRoute.post('/', UserController.create)
+userRoute.delete('/', UserController.destroy)
 
-export { participantRoute }
+export { userRoute }

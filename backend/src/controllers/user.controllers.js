@@ -1,4 +1,5 @@
-import { Rental, User } from "../models";
+import { Rental, User } from "../models/index.js";
+import { EncriptyPasswordProvider } from "../providers/encryptPassword.provaider.js";
 
 
 export class UserController {
@@ -54,8 +55,9 @@ export class UserController {
     }
     static async create (req, res) {
         try {
-            const { nome, curso, instituicao, grupo } = req.body
-            const user = await User.create({ nome, curso, instituicao, grupo  })
+            const { nome, email, password: normalPassword } = req.body
+            const password = await EncriptyPasswordProvider.hashPassword(password)
+            const user = await User.create({ nome, email, password, grupo: "usuario"  })
             console.log(user)
             res.status(201).json({message: "Success", user})
         } catch (error) {

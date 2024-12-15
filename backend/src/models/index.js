@@ -1,4 +1,4 @@
-import { Reantal } from "./rental";
-import { User } from "./user";
+import { Rental } from "./rental.js";
+import { User } from "./user.js";
 
-export { Reantal, User }
+export { Rental, User }

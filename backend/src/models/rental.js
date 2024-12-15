@@ -18,7 +18,7 @@ export const ReantalSchema = new Schema({
     id: { type: Types.ObjectId },  
 }, { versionKey: false });
 
-export const Reantal = model('Rental', ReantalSchema);
+export const Rental = model('Rental', ReantalSchema);
 
 /* 
     {
