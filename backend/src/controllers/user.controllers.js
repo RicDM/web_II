@@ -31,16 +31,10 @@ export class UserController {
     static async updated (req, res) {
         try {
             const id = req.params.id ? req.params.id : req.user._id
-            const  { nome, email, grupo: novoGrupo, password: newPassword } = req.body
-            const grupo = req.user.grupo == "admin" 
-                        ? novoGrupo
-                        : null
-            const password = req.user.grupo == "admin" 
-                        ? await EncriptyPasswordProvider.hashPassword(newPassword)
-                        : null
+            const  { nome, email, grupo } = req.body
             const updateUser = await User.findByIdAndUpdate(
                 {_id: id}, 
-                { nome, email, grupo, password },
+                { nome, email, grupo },
                 { new: true }
             )
             res.status(201).json({message: "book Success updated successfully", user: updateUser})
