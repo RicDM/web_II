@@ -4,13 +4,14 @@ import { AuthMiddleware } from "../middleware/auth.middleware.js";
 
 const userRoute = Router()
 
+//public routes
 userRoute.post('/', UserController.create)
 userRoute.get('/', UserController.readAll)
 userRoute.get('/:id', UserController.read)
 userRoute.get('/rental/:id', UserController.getRental)
 
-//security routes
-userRoute.use(AuthMiddleware.auth)
+
+userRoute.use(AuthMiddleware.auth) //security routes
 userRoute.get('/rental', UserController.getRental)
 userRoute.put('/', UserController.updated)
 userRoute.put('/password', UserController.updatedPassword)

@@ -2,11 +2,12 @@ import { Rental, User } from "../models/index.js";
 import { EncriptyPasswordProvider } from "../providers/encryptPassword.provaider.js";
 
 
+//crud
 export class UserController {
     static async readAll (req, res) {
         try {
-            const user = await User.find()
-            res.status(200).json(user)
+            const users = await User.find()
+            res.status(200).json(users)
         } catch (error) {
             console.error(error)
             return res.status(500).json({message: 'Internal server error'})
@@ -76,13 +77,14 @@ export class UserController {
             const { id } = req.params
             if (!id && !req.user) return res.status(400).json({message: 'Invalid data.'})
             const user = id ? await User.findById(id) : req.user 
-            console.log(user)
+            //console.log(user)
             res.status(200).json(user)
         } catch (error) {
             console.error(error)
             return res.status(500).json({message: 'Internal server error'})
         }
     }
+
     static async create (req, res) {
         try {
             const { nome, email, password: normalPassword } = req.body
