@@ -5,12 +5,15 @@ back
     permissions
     upload imagens
 
-front
-    new pages
-
-
 crud [tudo pelo id]
     create -> criar uma Rental
     read -> mostrar uma ou todas as rental
     updated -> atualizar uma casa
-    delete -> deletar uma casa 
+    delete -> deletar uma casa
+
+
+updated
+    revisar as rotas de:
+        usuario
+        rental
+    revisar as permissões e authenticação deusuario nas rotas.
