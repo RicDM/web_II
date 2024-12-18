@@ -4,12 +4,20 @@ import { UserRepository } from "../repositories/user.repository.js";
 
 //crud
 export class UserController {
-    userRepository
     /**
     * @param { UserRepository } userRepository
     */
-    constructor(userRepository) {
-        this.userRepository = userRepository
+    constructor(userRepository_) {
+        this.userRepository = userRepository_
+        this._bindAllMethods();
+    }
+
+    _bindAllMethods() {
+        Object.getOwnPropertyNames(Object.getPrototypeOf(this))
+            .filter(method => method !== 'constructor')  // Skip constructor
+            .forEach(method => {
+                this[method] = this[method].bind(this);  // Bind each method to 'this'
+            });
     }
     async readAll (req, res) {
         try {
