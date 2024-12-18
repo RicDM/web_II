@@ -16,11 +16,11 @@ export class UserController {
 
     static async getRental (req, res) {
         try {
-            const id = req.params.id
-            const events = id ? await Rental.find({
+            const id = req.params.id ? req.params.id : req.user._id
+             
+            const events = await Rental.find({
                 owner: id
             })
-            : req.user.rentals
             res.status(200).json(events)
         } catch (error) {
             console.error(error)

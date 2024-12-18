@@ -7,12 +7,11 @@ const userRoute = Router()
 //public routes
 userRoute.post('/', UserController.create)
 userRoute.get('/', UserController.readAll)
-userRoute.get('/:id', UserController.read)
+userRoute.get('/rental', AuthMiddleware.auth, UserController.getRental)
 userRoute.get('/rental/:id', UserController.getRental)
-
+userRoute.get('/:id', UserController.read)
 
 userRoute.use(AuthMiddleware.auth) //security routes
-userRoute.get('/rental', UserController.getRental)
 userRoute.put('/', UserController.updated)
 userRoute.put('/password', UserController.updatedPassword)
 userRoute.delete('/', UserController.destroy)
