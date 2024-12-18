@@ -32,12 +32,13 @@ export class UserController {
         try {
             const id = req.params.id ? req.params.id : req.user._id
             const  { nome, email, grupo: novoGrupo, password: newPassword } = req.body
-            const grupo = req.user.grupo == "admin" 
+             const grupo = req.user.grupo == "admin" 
                         ? novoGrupo
-                        : null
+                        : undefined
             const password = req.user.grupo == "admin" 
                         ? await EncriptyPasswordProvider.hashPassword(newPassword)
-                        : null
+                        : undefined
+            console.log(req.body)
             const updateUser = await User.findByIdAndUpdate(
                 {_id: id}, 
                 { nome, email, grupo, password },
@@ -102,10 +103,7 @@ export class UserController {
             if (!id) return res.status(400).json({message: 'Invalid data.'})
             
             await User.findByIdAndDelete(id)
-            await Rental.updateMany(
-                {"users._id": id }, 
-                { $pull: { users: { _id: [id] }}}
-            )
+            await Rental.deleteMany({ owner: id })
             return res.status(204).json({message: 'book deleted successfully'})
         } catch (error) {
             console.error(error)
