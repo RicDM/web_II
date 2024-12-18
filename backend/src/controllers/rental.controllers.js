@@ -28,7 +28,13 @@ export class RentalController {
     static async create(req, res) {
         try {
             const newRentalData = req.body;
-            const newRental = await Rental.create(newRentalData);
+            console.log(newRentalData.files)
+            if (!req.files || req.files.length === 0) {
+                return res.status(400).json({ error: "Nenhuma imagem foi enviada." });
+            }
+            const images = req.files.map(file => file.path)
+            delete newRentalData.files
+            const newRental = await Rental.create({ images, ...newRentalData } );
             res.status(201).json({ message: "Imóvel criado com sucesso", rental: newRental });
         } catch (error) {
             console.error(error);
