@@ -1,4 +1,4 @@
-import { User } from "../models/user.js";
+import { User } from "../db/mongoose/index.js";
 import { TokenProvider } from "../providers/token.provider.js";
 
 

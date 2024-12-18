@@ -8,6 +8,6 @@ import { loginRoute } from "./login.roure.js";
 export function routes(app) {
     app.use(express.json())
     app.use("/user", userRoute)
-    app.use("/login", loginRoute)
+    //app.use("/login", loginRoute)
     
 }

@@ -1,12 +1,15 @@
 import { Router } from "express";
 import { UserController } from "../controllers/user.controllers.js";
 import { AuthMiddleware } from "../middleware/auth.middleware.js";
+import { UserMongooseRepository } from "../repositories/implementations/user.mongoose.repository.js";
 
 const userRoute = Router()
-
+const userMongooseRepository = new UserMongooseRepository()
+const userController = new UserController(UserMongooseRepository)
+console.log(userController.userRepository.getAllUsers)
 //public routes
 userRoute.post('/', UserController.create)
-userRoute.get('/', UserController.readAll)
+userRoute.get('/', userController.readAll)
 userRoute.get('/:id', UserController.read)
 userRoute.get('/rental/:id', UserController.getRental)
 

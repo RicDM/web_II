@@ -1,12 +1,19 @@
-import { Rental, User } from "../models/index.js";
+//import { Rental, User } from "../models/index.js";
 import { EncriptyPasswordProvider } from "../providers/encryptPassword.provaider.js";
-
+import { UserRepository } from "../repositories/user.repository.js";
 
 //crud
 export class UserController {
-    static async readAll (req, res) {
+    userRepository
+    /**
+    * @param { UserRepository } userRepository
+    */
+    constructor(userRepository) {
+        this.userRepository = userRepository
+    }
+    async readAll (req, res) {
         try {
-            const users = await User.find()
+            const users = await this.userRepository.getAllUsers()
             res.status(200).json(users)
         } catch (error) {
             console.error(error)

@@ -1,4 +1,4 @@
-import { User } from "../models/index.js";
+import { User } from "../db/mongoose/index.js";
 import { EncriptyPasswordProvider } from "../providers/encryptPassword.provaider.js";
 import { TokenProvider } from "../providers/token.provider.js";
 
