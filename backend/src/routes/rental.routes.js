@@ -5,8 +5,8 @@ const rentalRoute = Router();
 
 rentalRoute.get('/', RentalController.readAll);       
 rentalRoute.get('/:id', RentalController.read);      
-rentalRoute.put('/', RentalController.update);          
+rentalRoute.put('/:id', RentalController.update);          
 rentalRoute.post('/', RentalController.create);       
-rentalRoute.delete('/', RentalController.destroy);      
+rentalRoute.delete('/:id', RentalController.destroy);      
 
 export { rentalRoute };
