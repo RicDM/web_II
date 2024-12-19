@@ -196,6 +196,15 @@ paths:
           description: Usuário deletado com sucesso
         500:
           description: Erro no servidor
+  /users/admin:
+    put:
+      summary: Atualiza o grupo de um usuario para admin
+      tags: [Admin] 
+      responses:
+        200:
+          description: Senha do usuário atualizada com sucesso
+        500:
+          description: Erro no servidor
 
   /users/admin/password/{id}:
     put:

@@ -44,7 +44,7 @@ export class UserController {
                 { nome, email, grupo, password },
                 { new: true }
             )
-            res.status(201).json({message: "book Success updated successfully", user: updateUser})
+            res.status(201).json({message: "user Success updated successfully", user: updateUser})
         } catch (error) {
             console.error(error)
             return res.status(500).json({message: 'Internal server error'})
@@ -65,7 +65,7 @@ export class UserController {
                 { password: hashNewPassword },
                 { new: true }
             )
-            res.status(201).json({message: "book Success updated successfully", user: updateUser})
+            res.status(201).json({message: "user Success updated successfully", user: updateUser})
         } catch (error) {
             console.error(error)
             return res.status(500).json({message: 'Internal server error'})
@@ -115,10 +115,10 @@ export class UserController {
         try {
             const id = req.params.id ? req.params.id : req.user._id
             if (!id) return res.status(400).json({message: 'Invalid data.'})
-            
-            await User.findByIdAndDelete(id)
+            const user = await User.findByIdAndDelete(id)
+            if (!user) return res.status(404).json({message: 'User not found'})
             await Rental.deleteMany({ owner: id })
-            return res.status(204).json({message: 'book deleted successfully'})
+            return res.status(204).json({message: 'user deleted successfully'})
         } catch (error) {
             console.error(error)
             return res.status(500).json({message: 'Internal server error'})
