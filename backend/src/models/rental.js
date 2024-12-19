@@ -1,5 +1,6 @@
 import { Schema, Types, model } from "mongoose";
 
+
 export const ReantalSchema = new Schema({ 
     status: { type: String, required: true },
     images: { type: [ String ], required: true },

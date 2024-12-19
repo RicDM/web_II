@@ -1,0 +1,423 @@
+openapi: 3.0.0
+info:
+  title: API de Usuários e Aluguéis
+  description: API para gerenciamento de usuários, aluguéis e segurança
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+tags:
+  - name: Users
+    description: Operações relacionadas a usuários
+  - name: Admin
+    description: Operações administrativas para usuários
+  - name: Rentals
+    description: Operações relacionadas a aluguéis
+paths:
+  /users:
+    post:
+      summary: Cria um novo usuário
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        201:
+          description: Usuário criado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  user:
+                    $ref: '#/components/schemas/User'
+        500:
+          description: Erro no servidor
+
+    get:
+      summary: Retorna todos os usuários
+      tags: [Users]
+      responses:
+        200:
+          description: Lista de usuários
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        500:
+          description: Erro no servidor
+
+  /users/rental:
+    get:
+      summary: Retorna os aluguéis do usuário autenticado
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Lista de aluguéis do usuário autenticado
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rental'
+        401:
+          description: Não autorizado
+        500:
+          description: Erro no servidor
+
+  /users/rental/{id}:
+    get:
+      summary: Retorna os aluguéis de um usuário específico
+      tags: [Users]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do usuário
+      responses:
+        200:
+          description: Lista de aluguéis do usuário
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rental'
+        500:
+          description: Erro no servidor
+
+  /users/{id}:
+    get:
+      summary: Retorna os dados de um usuário específico
+      tags: [Users]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do usuário
+      responses:
+        200:
+          description: Dados do usuário
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        500:
+          description: Erro no servidor
+
+  /users:
+    put:
+      summary: Atualiza os dados do usuário autenticado
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                email:
+                  type: string
+                grupo:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: Usuário atualizado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  user:
+                    $ref: '#/components/schemas/User'
+        500:
+          description: Erro no servidor
+
+  /users/password:
+    put:
+      summary: Atualiza a senha do usuário autenticado
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                newPassword:
+                  type: string
+      responses:
+        200:
+          description: Senha atualizada com sucesso
+        401:
+          description: Senha incorreta
+        500:
+          description: Erro no servidor
+
+  /users:
+    delete:
+      summary: Deleta o usuário autenticado
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      responses:
+        204:
+          description: Usuário deletado com sucesso
+        500:
+          description: Erro no servidor
+
+  /users/admin/password/{id}:
+    put:
+      summary: Atualiza a senha de um usuário (admin)
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                newPassword:
+                  type: string
+      responses:
+        200:
+          description: Senha do usuário atualizada com sucesso
+        500:
+          description: Erro no servidor
+
+  /users/admin/{id}:
+    put:
+      summary: Atualiza os dados de um usuário (admin)
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                email:
+                  type: string
+                grupo:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: Dados do usuário atualizados com sucesso
+        500:
+          description: Erro no servidor
+
+  /users/admin/{id}:
+    delete:
+      summary: Deleta um usuário (admin)
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do usuário
+      responses:
+        204:
+          description: Usuário deletado com sucesso
+        500:
+          description: Erro no servidor
+
+  
+  /rentals:
+    get:
+      summary: Lista todos os imóveis
+      tags: [Rentals]
+      responses:
+        '200':
+          description: Lista de imóveis
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rental'
+        '500':
+          description: Erro ao buscar imóveis
+          
+    post:
+      summary: Cria um novo imóvel
+      tags: [Rentals]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RentalCreate'
+      responses:
+        '201':
+          description: Imóvel criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rental'
+        '400':
+          description: Erro ao criar imóvel (por exemplo, falta de imagem)
+          
+  /rentals/{id}:
+    get:
+      summary: Obtém um imóvel pelo ID
+      tags: [Rentals]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do imóvel
+      responses:
+        '200':
+          description: Imóvel encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rental'
+        '404':
+          description: Imóvel não encontrado
+        '500':
+          description: Erro ao buscar imóvel
+
+    put:
+      summary: Atualiza um imóvel pelo ID
+      tags: [Rentals]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do imóvel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RentalUpdate'
+      responses:
+        '200':
+          description: Imóvel atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rental'
+        '400':
+          description: Erro ao atualizar imóvel
+        '404':
+          description: Imóvel não encontrado
+
+    delete:
+      summary: Deleta um imóvel pelo ID
+      tags: [Rentals]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do imóvel
+      responses:
+        '200':
+          description: Imóvel deletado com sucesso
+        '404':
+          description: Imóvel não encontrado
+        '500':
+          description: Erro ao deletar imóvel
+          
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        nome:
+          type: string
+        email:
+          type: string
+        grupo:
+          type: string
+        password:
+          type: string
+
+    Rental:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID único do imóvel
+        name:
+          type: string
+          description: Nome do imóvel
+        description:
+          type: string
+          description: Descrição do imóvel
+        images:
+          type: array
+          items:
+            type: string
+          description: Lista de URLs das imagens
+        price:
+          type: number
+          format: float
+          description: Preço do aluguel
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

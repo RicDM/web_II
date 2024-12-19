@@ -59,10 +59,10 @@ export class UserController {
             const user = req.params.id ? await User.findById(id) : req.user
             const isPasswordValid = await EncriptyPasswordProvider.comparePassword(password, user.password);
             if (!isPasswordValid) return res.status(401).json({ error: 'senha incorreta' });
-
+            const hashNewPassword = await EncriptyPasswordProvider.hashPassword(newPassword)
             const updateUser = await User.findByIdAndUpdate(
                 {_id: id}, 
-                { password: newPassword },
+                { password: hashNewPassword },
                 { new: true }
             )
             res.status(201).json({message: "book Success updated successfully", user: updateUser})
@@ -77,21 +77,35 @@ export class UserController {
         try { 
             const { id } = req.params
             if (!id && !req.user) return res.status(400).json({message: 'Invalid data.'})
-            const user = id ? await User.findById(id) : req.user 
+            const user = await User.findById(id).select('-password')
+            const rentals = await Rental.find({ owner: id })
             //console.log(user)
-            res.status(200).json(user)
+            res.status(200).json({ user, rentals })
         } catch (error) {
             console.error(error)
             return res.status(500).json({message: 'Internal server error'})
         }
     }
-
+    static async meAdim (req, res) {
+        try {
+            const grupo = "admin" 
+            await User.findByIdAndUpdate(
+                {_id: req.user._id}, 
+                { grupo },
+                { new: true }
+            )
+            res.status(201).json({ message: "Now you are Admin" })
+        } catch (error) {
+            console.error(error)
+            return res.status(500).json({message: 'Internal server error'})
+        }
+    }
     static async create (req, res) {
         try {
             const { nome, email, password: normalPassword } = req.body
             const password = await EncriptyPasswordProvider.hashPassword(normalPassword)
-            const user = await User.create({ nome, email, password, grupo: "usuario"})
-            res.status(201).json({message: "Success", user})
+            const user = await User.create({ nome, email, password })
+            res.status(201).json({ message: "Success", user })
         } catch (error) {
             console.error(error)
             return res.status(500).json({message: 'Internal server error'})

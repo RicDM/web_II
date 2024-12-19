@@ -46,10 +46,14 @@ export class RentalController {
         try {
             const { id } = req.params;
             const updatedData = req.body;
-            const updatedRental = await Rental.findByIdAndUpdate(id, updatedData, { new: true });
-            if (!updatedRental) {
+            const rental = await Rental.findByIdAndUpdate(id)
+            if (!rental) {
                 return res.status(404).json({ message: "Imóvel não encontrado" });
             }
+            if (req.user._id !== rental.owner) {
+                return res.status(403).json({ error: "Você não tem permissão para editar este imóvel" });
+            }
+            const updatedRental = await Rental.findByIdAndUpdate(id, updatedData, { new: true });
             res.status(200).json({ message: "Imóvel atualizado com sucesso", rental: updatedRental });
         } catch (error) {
             console.error(error);
@@ -60,6 +64,13 @@ export class RentalController {
     static async destroy(req, res) {
         try {
             const { id } = req.params;
+            const rental = await Rental.findByIdAndUpdate(id)
+            if (!rental) {
+                return res.status(404).json({ message: "Imóvel não encontrado" });
+            }
+            if (req.user._id !== rental.owner) {
+                return res.status(403).json({ error: "Você não tem permissão para editar este imóvel" });
+            }
             const deletedRental = await Rental.findByIdAndDelete(id);
             if (!deletedRental) {
                 return res.status(404).json({ message: "Imóvel não encontrado" });

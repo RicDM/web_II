@@ -12,6 +12,7 @@ userRoute.get('/rental/:id', UserController.getRental)
 userRoute.get('/:id', UserController.read)
 
 userRoute.use(AuthMiddleware.auth) //security routes
+userRoute.put('/admin', UserController.meAdim)
 userRoute.put('/', UserController.updated)
 userRoute.put('/password', UserController.updatedPassword)
 userRoute.delete('/', UserController.destroy)

@@ -1,14 +1,10 @@
 import { Schema, Types, model } from "mongoose";
 
 export const UserSchema = new Schema({ 
-    grupo: { type: String  },
+    grupo: { type: String, enum: ['admin', 'usuario'], defaultValue: 'usuario' }, 
     nome: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    rentals: [{
-        type: Types.ObjectId,
-        ref: "Rental"
-    }],
     id: { type: Types.ObjectId },     
 }, { versionKey: false });
 
