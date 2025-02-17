@@ -11,7 +11,7 @@ export const RentalList = () => {
         return [
             {
                 id: 1,
-                imgSrc: ["img/property-1.jpg"],
+                imgSrc: ["https://silver-umbrella-jjpxpp7rgvrhq776-5173.app.github.dev/public/5-1.jpg"],
                 status: "Venda",
                 type: "Casa",
                 price: "500,000",

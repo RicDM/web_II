@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
+import house  from "../img/icon-house.png"
+import villa from "../img/icon-villa.png"
+import apartment from "../img/icon-apartment.png"
+import housing from "../img/icon-housing.png"
+import building from "../img/icon-building.png"
+import neighborhood from "../img/icon-neighborhood.png"
+import luxury from "../img/icon-luxury.png"
+import condominium from "../img/icon-condominium.png"
+
 export const RentalTypes = () => {
     const [data, setData] = useState([]); // Estado para armazenar os dados das propriedades
 
@@ -27,14 +36,14 @@ export const RentalTypes = () => {
 
     // Dados dos tipos de propriedade
     const propertyTypes = [
-        { name: "Casa", imgSrc: "img/icon-house.png" },
-        { name: "Residencial", imgSrc: "img/icon-villa.png" },
-        { name: "Apartamento", imgSrc: "img/icon-apartment.png" },
-        { name: "Escritorio", imgSrc: "img/icon-housing.png" },
-        { name: "Prédio", imgSrc: "img/icon-building.png" },
-        { name: "Germinada", imgSrc: "img/icon-neighborhood.png" },
-        { name: "Garagem", imgSrc: "img/icon-luxury.png" },
-        { name: "Comercial", imgSrc: "img/icon-condominium.png" },
+        { name: "Casa", imgSrc: house },
+        { name: "Residencial", imgSrc: villa },
+        { name: "Apartamento", imgSrc: apartment },
+        { name: "Escritorio", imgSrc: housing },
+        { name: "Prédio", imgSrc: building },
+        { name: "Germinada", imgSrc: neighborhood },
+        { name: "Garagem", imgSrc: luxury },
+        { name: "Comercial", imgSrc: condominium },
     ];
 
     // Função para gerar a URL com o tipo de propriedade
