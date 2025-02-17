@@ -24,6 +24,9 @@ import { Agents } from "./pages/Agents";
 import { RentalListPage } from "./pages/RentalListPage";
 import { RentalTypesPage } from "./pages/RentalTypesPage";
 import { TestimonialList } from "./pages/TestionalList";
+import { AddRental } from "./pages/AddRental";
+import { SingUp } from "./pages/SingUp";
+import { Login } from "./pages/Login";
 
 const root = document.getElementById("root");
 
@@ -40,6 +43,11 @@ ReactDOM.createRoot(root).render(
         </div>
       </div>
       <Routes>
+
+      <Route path="singup" element={<SingUp/>} />
+      <Route path="login" element={<Login/>} />
+
+
         <Route index element={<App />} />
         <Route path="contact" element={<Contact/>} />
         <Route path="about" element={<About/>} />
@@ -47,6 +55,7 @@ ReactDOM.createRoot(root).render(
         <Route path="rentals" element={<RentalListPage/>}/>
         <Route path="types" element={<RentalTypesPage />}/>
         <Route path="testimonials" element={<TestimonialList />}/>
+        <Route path="newrental" element={<AddRental />}/>
         <Route path="rental/:id" element={<RentalInfo />}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
