@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router';
 
 export const RentalList = () => {
     const [properties, setProperties] = useState([]); // Estado para armazenar as propriedades
@@ -81,9 +82,9 @@ export const RentalList = () => {
                         <div key={property.id} className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay={`${delay}s`}>
                             <div className="property-item rounded overflow-hidden">
                                 <div className="position-relative overflow-hidden">
-                                    <a href={`detalhe.html?id=${property.id}`}>
+                                    <NavLink to={`rental/${property.id}`}>
                                         <img className="img-fluid image-lista" src={property.imgSrc[0]} alt={property.title} />
-                                    </a>
+                                    </NavLink>
                                     <div className="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
                                         {property.status}
                                     </div>

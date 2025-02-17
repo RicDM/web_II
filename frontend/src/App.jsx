@@ -1,12 +1,7 @@
 import { useState } from 'react'
-import './App.css'
-import { NavBar } from './components/NavBar'
-import { SearchRental } from './components/SearchRental'
 import { RentalTypes } from './components/RentalTypes'
 import { RentalList } from './components/RentalList'
 
-import carousel1 from "./img/carousel-1.jpg"
-import carousel2 from "./img/carousel-2.jpg"
 
 import testimonial5 from "./img/testimonial-5.jpg"
 import testimonial3 from "./img/testimonial-2.jpg"
@@ -18,55 +13,6 @@ function App() {
 
   return (
     <>
-      <div>
-        
-        <div className="container-xxl bg-white p-0">
-          {/* <div id="spinner" className="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-              <div className="spinner-border text-primary" style={{width: '3rem', height: "3rem"}} role="status">
-                  <span className="sr-only">Carregando...</span>
-              </div>
-          </div> */}
-        
-       {/*  <!-- Navbar start --> */}
-        <div className="container-fluid nav-bar bg-transparent" id="com-navbar">
-           <NavBar/>
-        </div>
-        {/* <!-- Navbar End -->
-
-
-        <!-- Header Start --> */}
-        <div className="container-fluid header bg-white p-0">
-            <div className="row g-0 align-items-center flex-column-reverse flex-md-row">
-                <div className="col-md-6 p-5 mt-lg-5">
-                    <h1 className="display-5 animated fadeIn mb-4">Encontre o <span className="text-primary">imóvel</span> de forma fácil e segura.</h1>
-                    <p className="animated fadeIn mb-4 pb-2">Conectamos você ao lar perfeito com praticidade, agilidade e a melhor experiência de aluguel.</p>
-                    <a href="#atalho" className="btn btn-primary py-3 px-5 me-3 animated fadeIn">Começar</a>
-                </div>
-                <div className="col-md-6 animated fadeIn">
-                    <div className="owl-carousel header-carousel">
-                        <div className="owl-carousel-item">
-                            <img className="img-fluid" src={carousel1} alt=""/>
-                        </div>
-                        <div className="owl-carousel-item">
-                            <img className="img-fluid" src={carousel2} alt=""/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {/* <!-- Header End -->
-
-
-        <!-- Search Start --> */}
-        <div className="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style={{padding: "35px"}}>
-            <div className="container" id="com-search">
-               <SearchRental/>
-            </div>
-        </div>
-       {/*  <!-- Search End -->
-
-
-        <!-- Category Start --> */}
         <div className="container-xxl py-5">
             <div className="container" id="com-propstypes">
                <RentalTypes/>
@@ -182,51 +128,6 @@ function App() {
                 </div>
             </div>
         </div>
-        {/* <!-- Testimonial End -->
-        
-
-        <!-- Footer Start --> */}
-        <div className="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-            <div className="container py-5">
-                <div className="row g-5 d-flex justify-content-around">
-                    <div className="col-lg-3 col-md-6">
-                        <h5 className="text-white mb-4">Entre em contato</h5>
-                        <p className="mb-2"><i className="fa fa-map-marker-alt me-3"></i>Folha 17, Marabá - PA</p>
-                        <p className="mb-2"><i className="fa fa-phone-alt me-3"></i>(94) 99234-5678</p>
-                        <p className="mb-2"><i className="fa fa-envelope me-3"></i>AlugueAqui@gmail.com</p>
-                        <div className="d-flex pt-2">
-                            <a className="btn btn-outline-light btn-social" href=""><i className="fab fa-twitter"></i></a>
-                            <a className="btn btn-outline-light btn-social" href=""><i className="fab fa-facebook-f"></i></a>
-                            <a className="btn btn-outline-light btn-social" href=""><i className="fab fa-youtube"></i></a>
-                            <a className="btn btn-outline-light btn-social" href=""><i className="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-6">
-                        <h5 className="text-white mb-4">Links rápidos</h5>
-                        <a className="btn btn-link text-white-50" href="">Sobre nós</a>
-                        <a className="btn btn-link text-white-50" href="">Contatos</a>
-                        <a className="btn btn-link text-white-50" href="">Nossos serviçoes</a>
-                        <a className="btn btn-link text-white-50" href="">Política de Privacidade</a>
-                        <a className="btn btn-link text-white-50" href="">Termos e condições</a>
-                    </div>
-                    <div className="col-lg-3 col-md-6">
-                        <h5 className="text-white mb-4">Newsletter</h5>
-                        <p>Insira seu e-mail para ficar por dentro das novidades e receber mais informações!</p>
-                        <div className="position-relative mx-auto" style={{maxWidth: "400px"}}>
-                            {/* <input className="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email"> */}
-                            <button type="button" className="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Inscreva-se</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {/* <!-- Footer End -->
-
-
-        <!-- Back to Top --> */}
-        <a href="#" className="btn btn-lg btn-primary btn-lg-square back-to-top"><i className="bi bi-arrow-up"></i></a>
-    </div>
-    </div>
     </>
   )
 }
