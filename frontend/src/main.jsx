@@ -21,6 +21,9 @@ import { About } from "./pages/About";
 import { RentalInfo } from "./components/RentalInfo";
 import { NotFound } from "./pages/NotFound";
 import { Agents } from "./pages/Agents";
+import { RentalListPage } from "./pages/RentalListPage";
+import { RentalTypesPage } from "./pages/RentalTypesPage";
+import { TestimonialList } from "./pages/TestionalList";
 
 const root = document.getElementById("root");
 
@@ -41,6 +44,9 @@ ReactDOM.createRoot(root).render(
         <Route path="contact" element={<Contact/>} />
         <Route path="about" element={<About/>} />
         <Route path="agents" element={<Agents />}/>
+        <Route path="rentals" element={<RentalListPage/>}/>
+        <Route path="types" element={<RentalTypesPage />}/>
+        <Route path="testimonials" element={<TestimonialList />}/>
         <Route path="rental/:id" element={<RentalInfo />}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
