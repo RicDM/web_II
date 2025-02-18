@@ -7,11 +7,13 @@ export class AuthMiddleware {
     const token = req.headers['authorization'];
     if (!token) return res.status(403).json({ error: 'Token não fornecido' });
     try {
-      const { id:userId } = TokenProvider.verifyToken(token);
+      const { id: userId } = TokenProvider.verifyToken(token);
       const user = await User.findById(userId);
+      console.log(user)
       req.user = user
       next();
     } catch (err) {
+      console.log(err)
       res.status(401).json({ error: 'Token inválido ou expirado' });
     }
   }

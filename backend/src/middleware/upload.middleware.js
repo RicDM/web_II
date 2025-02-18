@@ -4,7 +4,7 @@ import path from "path";
 export class UploadProvider {
   static storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      const uploadPath = path.resolve("./uploads/images");
+      const uploadPath = path.resolve("./public/");
       cb(null, uploadPath); // Define o diretório de upload
     },
     filename: (req, file, cb) => {
@@ -35,6 +35,7 @@ export class UploadProvider {
     uploadMultiple(req, res, (err) => {
       console.log(req.files, "<-")
       if (err) {
+        console.log(err)
         return res.status(400).json({ error: err.message });
       }
       next();

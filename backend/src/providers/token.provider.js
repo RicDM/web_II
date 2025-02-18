@@ -8,6 +8,7 @@ export class TokenProvider {
 
     static verifyToken(token) {
         const decoded = jwt.verify(token, secrets.token_secret);
+        console.log(decoded)
         return decoded;
     }
 }

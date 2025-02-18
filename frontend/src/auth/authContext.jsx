@@ -9,7 +9,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [token, setToken] = useState(false)
+  const [token, setToken] = useState("")
   // Função para fazer login
   const login = async (data) => {
     const { token: tokenUser } = await getToken(data)
@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getUser = () => {
+    console.log(token, '-<', isAuthenticated)
    return useUser(token)
   }
 

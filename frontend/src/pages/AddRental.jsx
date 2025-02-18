@@ -1,14 +1,21 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../auth/authContext';
 
 export const AddRental = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-
-  const onSubmit = (data) => {
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const { getUser } = useAuth()
+  const userReq = getUser()
+  const onSubmit = async (data) => {
     console.log('Dados do imóvel:', data);
-    // Aqui você pode enviar os dados para uma API ou salvar localmente
+    try {
+      await userReq.createRental(data);
+      alert('Imóvel cadastrado com sucesso!');
+      reset(); // Limpa o formulário após o envio
+    } catch (error) {
+      alert('Erro ao cadastrar imóvel. Tente novamente.');
+    }
   };
-
   return (
     <div className="container-xxl py-5">
       <div className="container">
@@ -195,24 +202,6 @@ export const AddRental = () => {
               </div>
             </div>
 
-            {/* Proprietário */}
-            <div className="col-md-6">
-              <div className="form-floating">
-                <input
-                  type="text"
-                  className={`form-control ${errors.owner ? 'is-invalid' : ''}`}
-                  id="owner"
-                  placeholder="Proprietário"
-                  {...register('owner', { required: 'Proprietário é obrigatório' })}
-                />
-                <label htmlFor="owner">Proprietário</label>
-                {errors.owner && (
-                  <div className="invalid-feedback">{errors.owner.message}</div>
-                )}
-              </div>
-            </div>
-
-            {/* Imagens */}
             <div className="col-md-12">
               <div className="form-floating">
                 <input
