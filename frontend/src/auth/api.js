@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://silver-umbrella-jjpxpp7rgvrhq776-3000.app.github.dev';
+const baseURL = 'http://localhost:3000/';
 
 // Função de login
 export const login = async ({ email, password }) => {
