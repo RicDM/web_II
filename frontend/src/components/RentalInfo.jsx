@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css'; // Estilos do Swiper
 import SwiperCore from 'swiper'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { useAuth } from '../auth/authContext';
 console.log(Autoplay)
 // Inicializa os módulos do Swiper
 SwiperCore.use([Navigation, Pagination, Autoplay]);
@@ -16,31 +17,17 @@ export const RentalInfo = () => {
   const { id } = useParams();
 
   // Função para buscar os dados do aluguel pelo ID
-  const getRentalById = async (id) => {
-    // Simulação de uma requisição assíncrona
-    /* const response = await fetch(`/api/rentals/${id}`);
-    const data = await response.json();
-    return data; */
-    return {
-        id: 1,
-        imgSrc: ["https://silver-umbrella-jjpxpp7rgvrhq776-5173.app.github.dev/public/5-1.jpg"],
-        status: "Venda",
-        type: "Casa",
-        price: "500,000",
-        title: "Casa com 3 quartos",
-        location: "São Paulo, SP",
-        sqft: "200m²",
-        bed: "3 Quartos",
-        bath: "2 Banheiros",
-    }
-  };
+  const { getUser } = useAuth()
+  const userReq = getUser()
+   
+
 
   // Efeito para carregar os dados do aluguel
   useEffect(() => {
     if (id) {
-      getRentalById(id).then((rentalData) => {
+      userReq.getOneRental(id).then((rentalData) => {
         setRental(rentalData);
-        setImages(rentalData.imgSrc);
+        setImages(rentalData.images);
       });
     }
   }, [id]); // Executa sempre que o "id" mudar

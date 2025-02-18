@@ -4,7 +4,7 @@ import { useAuth } from "../auth/authContext"
 
 export const NavBar = () => {
 
-    const { login } = useAuth()
+    const { isAuthenticated, logout } = useAuth()
     return <nav className="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
     <NavLink to="/" end className="navbar-brand d-flex align-items-center text-center">
         <div className="icon p-2 me-2">
@@ -17,7 +17,12 @@ export const NavBar = () => {
     </button>
     <div className="collapse navbar-collapse" id="navbarCollapse">
         <div className="navbar-nav ms-auto">
-            <NavLink to="/login" className="av-item nav-link">Login</NavLink>
+            <NavLink to={isAuthenticated ? "/" : "/login"} className="av-item nav-link" 
+            onClick={()=>{
+                isAuthenticated ? logout() : <Navigate to="/login" />
+            }}>
+                {isAuthenticated ? "Sair" : "Login"}
+            </NavLink>
             <NavLink to="/" end className="nav-item nav-link active">Inicio</NavLink>
             <div className="nav-item dropdown">
                 <NavLink to="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">imoveis</NavLink>

@@ -10,7 +10,7 @@ export const RentalList = () => {
     const { getUser } = useAuth()
     const userReq = getUser()
     // Função para buscar os dados das propriedades
-    const getAllRentals = async (status, type, sector) => {
+    const getAllRentals = async () => {
         const data = await userReq.getRentals()
         return data
         /* return [
@@ -46,10 +46,8 @@ export const RentalList = () => {
 
         setActiveStatus(statusOfList || "");
 
-        getAllRentals(statusOfList, typeOfList, sectorOfList).then((data) => {
-            if (window.location.pathname === "/index.html") {
-                data = data.slice(0, 6); // Limita a 6 itens na página inicial
-            }
+        getAllRentals().then((data) => {
+            console.log(data)
             setProperties(data);
         });
     }, []);
@@ -83,10 +81,10 @@ export const RentalList = () => {
                 {properties.map((property, index) => {
                     const delay = 0.1 + index * 0.2; // Ajusta o delay da animação
                     return (
-                        <div key={property.id} className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay={`${delay}s`}>
+                        <div key={property._id} className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay={`${delay}s`}>
                             <div className="property-item rounded overflow-hidden">
                                 <div className="position-relative overflow-hidden">
-                                    <NavLink to={`/rental/${property.id}`}>
+                                    <NavLink to={`/rental/${property._id}`}>
                                         <img className="img-fluid image-lista" src={property.images[0]} alt={property.title} />
                                     </NavLink>
                                     <div className="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
@@ -98,9 +96,10 @@ export const RentalList = () => {
                                 </div>
                                 <div className="p-4 pb-0">
                                     <h5 className="text-primary mb-3">R$ {property.price}</h5>
-                                    <a className="d-block h5 mb-2" href={`detalhe.html?id=${property.id}`}>
+                                    
+                                    <NavLink className="d-block h5 mb-2" to={`rental/${property._id}`}>
                                         {property.title}
-                                    </a>
+                                    </NavLink>
                                     <p>
                                         <i className="fa fa-map-marker-alt text-primary me-2"></i>
                                         {property.location}
