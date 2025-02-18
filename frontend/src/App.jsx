@@ -42,7 +42,7 @@ function App() {
                        <RentalList/>
                     </div>
                     <div className="col-12 text-center">
-                        <NavLink classNAme="btn btn-primary py-3 px-5" to="/rentals">Mostrar mais imoveis</NavLink>
+                        <NavLink className="btn btn-primary py-3 px-5" to="/rentals">Mostrar mais imoveis</NavLink>
                     </div>
                 </div>
             </div>
