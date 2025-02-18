@@ -7,6 +7,7 @@ import testimonial5 from "./img/testimonial-5.jpg"
 import testimonial3 from "./img/testimonial-2.jpg"
 import testimonial2 from "./img/testimonial-3.jpg"
 import call from "./img/call-to-action.jpg"
+import { NavLink } from 'react-router'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -41,7 +42,7 @@ function App() {
                        <RentalList/>
                     </div>
                     <div className="col-12 text-center">
-                        <a className="btn btn-primary py-3 px-5" href="property-list.html">Mostrar mais imoveis</a>
+                        <NavLink classNAme="btn btn-primary py-3 px-5" to="/rentals">Mostrar mais imoveis</NavLink>
                     </div>
                 </div>
             </div>
@@ -63,7 +64,7 @@ function App() {
                                     <h1 className="mb-3">Entre em contato com nossos corretores certificados</h1>
                                     <p>Entre em contato e aproveite a experiência de nossos corretores certificados para encontrar seu imóvel. </p>
                                 </div>
-                                <a href="" className="btn btn-primary py-3 px-4 me-2"><i className="fa fa-phone-alt me-2"></i>Entre em contato</a>
+                                <NavLink href="/contact" className="btn btn-primary py-3 px-4 me-2"><i className="fa fa-phone-alt me-2"></i>Entre em contato</NavLink>
                             </div>
                         </div>
                     </div>
