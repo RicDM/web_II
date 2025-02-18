@@ -6,6 +6,7 @@ export const ProtectedRoute = () => {
   const { isAuthenticated } = useAuth(); // Verifica se o usuário está autenticado
 
   // Se o usuário não estiver autenticado, redirecione para a página de login
+  console.log(isAuthenticated)
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
