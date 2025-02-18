@@ -64,7 +64,7 @@ export const Login = () => {
             {/* Link para Cadastro */}
             <div className="col-12 text-center">
               <p className="mb-0">
-                Não tem uma conta? <Link to="/cadastro">Cadastre-se</Link>
+                Não tem uma conta? <Link to="/singup">Cadastre-se</Link>
               </p>
             </div>
           </div>

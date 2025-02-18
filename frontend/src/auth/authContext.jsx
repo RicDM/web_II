@@ -5,7 +5,7 @@ const AuthContext = createContext();
 
 // Provedor de autenticação
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   // Função para fazer login
   const login = () => {
