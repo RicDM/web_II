@@ -12,10 +12,11 @@ export const AddRental = () => {
       await userReq.createRental(data);
       alert('Imóvel cadastrado com sucesso!');
       reset(); // Limpa o formulário após o envio
+      <Navigate to="/" />
     } catch (error) {
       alert('Erro ao cadastrar imóvel. Tente novamente.');
     }
-  };
+  }
   return (
     <div className="container-xxl py-5">
       <div className="container">

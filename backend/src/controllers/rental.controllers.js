@@ -22,6 +22,8 @@ export class RentalController {
         try {
             const { id } = req.params;
             const rental = await Rental.findById(id);
+            const images = ImageLocalProvider.getFileUrl(rental.images, req)
+            rental.images = images
             if (!rental) {
                 return res.status(404).json({ message: "Imóvel não encontrado" });
             }

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { login as getToken, useUser } from './api';
-import { useNavigate } from 'react-router';
+import { Navigate, useNavigate } from 'react-router';
 
 // Cria o contexto de autenticação
 const AuthContext = createContext();
@@ -29,8 +29,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('token', tokenUser)
       setIsAuthenticated(true);
       setToken(tokenUser)
-      navigate('/')
-      return { error: false }
+      return <Navigate to="/" />
     } else return { error: true }
   };
 
@@ -38,7 +37,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('token')
     setIsAuthenticated(false);
-    navigate('/login')
+    <Navigate to="/login" />
   };
 
   const getUser = () => {
