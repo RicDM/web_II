@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../auth/authContext';
+import { Navigate } from 'react-router';
 
 export const AddRental = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
