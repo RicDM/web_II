@@ -1,13 +1,15 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
+import { useAuth } from '../auth/authContext';
 
 export const Login = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-
-  const onSubmit = (data) => {
-    console.log('Dados do login:', data);
-    // Aqui você pode enviar os dados para uma API ou autenticar o usuário
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const { login } = useAuth()
+  const onSubmit = async (data) => {
+    const { error } =  await login(data)
+    if (error) window.alert("usuario ou senha errados")
+    reset()
   };
 
   return (

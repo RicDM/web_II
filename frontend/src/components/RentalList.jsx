@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router';
+import { useAuth } from '../auth/authContext';
 
 export const RentalList = () => {
     const [properties, setProperties] = useState([]); // Estado para armazenar as propriedades
     const [statusFilters, setStatusFilters] = useState(["Todas", "Top", "Recentes"]); // Filtros de status
     const [activeStatus, setActiveStatus] = useState(""); // Estado para o filtro ativo
 
+    const { getUser } = useAuth()
+    const userReq = getUser()
     // Função para buscar os dados das propriedades
     const getAllRentals = async (status, type, sector) => {
-        // Simulação de uma requisição assíncrona
-        return [
+        const data = await userReq.getRentals()
+        return data
+        /* return [
             {
                 id: 1,
                 imgSrc: ["https://silver-umbrella-jjpxpp7rgvrhq776-5173.app.github.dev/public/5-1.jpg"],
@@ -23,7 +27,7 @@ export const RentalList = () => {
                 bath: "2 Banheiros",
             },
             // Adicione mais propriedades aqui...
-        ];
+        ]; */
     };
 
     // Função para mudar os parâmetros de filtro
@@ -83,7 +87,7 @@ export const RentalList = () => {
                             <div className="property-item rounded overflow-hidden">
                                 <div className="position-relative overflow-hidden">
                                     <NavLink to={`/rental/${property.id}`}>
-                                        <img className="img-fluid image-lista" src={property.imgSrc[0]} alt={property.title} />
+                                        <img className="img-fluid image-lista" src={property.images[0]} alt={property.title} />
                                     </NavLink>
                                     <div className="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
                                         {property.status}
