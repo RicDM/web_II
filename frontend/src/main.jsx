@@ -27,6 +27,8 @@ import { TestimonialList } from "./pages/TestionalList";
 import { AddRental } from "./pages/AddRental";
 import { SingUp } from "./pages/SingUp";
 import { Login } from "./pages/Login";
+import { ProtectedRoute } from "./auth/ProtectedRoute";
+import { AuthProvider } from "./auth/authContext";
 
 const root = document.getElementById("root");
 
@@ -42,23 +44,26 @@ ReactDOM.createRoot(root).render(
           <SearchRental/>
         </div>
       </div>
-      <Routes>
+      <AuthProvider>
+        <Routes>
 
-      <Route path="singup" element={<SingUp/>} />
-      <Route path="login" element={<Login/>} />
+          <Route path="singup" element={<SingUp/>} />
+          <Route path="login" element={<Login/>} />
 
-
-        <Route index element={<App />} />
-        <Route path="contact" element={<Contact/>} />
-        <Route path="about" element={<About/>} />
-        <Route path="agents" element={<Agents />}/>
-        <Route path="rentals" element={<RentalListPage/>}/>
-        <Route path="types" element={<RentalTypesPage />}/>
-        <Route path="testimonials" element={<TestimonialList />}/>
-        <Route path="newrental" element={<AddRental />}/>
-        <Route path="rental/:id" element={<RentalInfo />}/>
-        <Route path="*" element={<NotFound/>}/>
-      </Routes>
+          <Route element={<ProtectedRoute />}>
+            <Route index element={<App />} />
+            <Route path="contact" element={<Contact/>} />
+            <Route path="about" element={<About/>} />
+            <Route path="agents" element={<Agents />}/>
+            <Route path="rentals" element={<RentalListPage/>}/>
+            <Route path="types" element={<RentalTypesPage />}/>
+            <Route path="testimonials" element={<TestimonialList />}/>
+            <Route path="newrental" element={<AddRental />}/>
+            <Route path="rental/:id" element={<RentalInfo />}/>
+          </Route>
+          <Route path="*" element={<NotFound/>}/>
+        </Routes>
+        </AuthProvider>
       <Footer/>
       <a 
       href="#" 
