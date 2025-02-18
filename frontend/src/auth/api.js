@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:3000/';
+const baseURL = 'http://localhost:3000';
 
 // Função de login
 export const login = async ({ email, password }) => {
