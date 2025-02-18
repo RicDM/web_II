@@ -1,5 +1,6 @@
 import React from 'react';
 import { CallAction } from "../components/CallAction";
+import { Header } from "../components/Header"; 
 
 export const Agents = () => {
   const agents = [
@@ -29,7 +30,6 @@ export const Agents = () => {
     },
   ];
 
-  // Função para gerar o card de cada corretor
   const generatePropertyAgent = (agent) => (
     <div className="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s" key={agent.fullName}>
       <div className="team-item rounded overflow-hidden">
@@ -61,20 +61,23 @@ export const Agents = () => {
     </div>
   );
 
-  return<><div className="container-xxl py-5">     
+  return (
+    <>
+      <Header /> 
+      <div className="container-xxl py-5">
         <div className="container" id="com-corretores">
-            <div className="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style={{ maxWidth: '600px' }}>
-                <h1 className="mb-3">Corretores</h1>
-                <p>
-                    Nossos corretores são profissionais dedicados, prontos para oferecer suporte e guiar você na escolha do imóvel ideal, tornando o processo de aluguel mais fácil e seguro.
-                </p>
-            </div>
-            <div className="row g-4 justify-content-center">
-                {agents.map((agent) => generatePropertyAgent(agent))}
-            </div>
+          <div className="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style={{ maxWidth: '600px' }}>
+            <h1 className="mb-3">Corretores</h1>
+            <p>
+              Nossos corretores são profissionais dedicados, prontos para oferecer suporte e guiar você na escolha do imóvel ideal, tornando o processo de aluguel mais fácil e seguro.
+            </p>
+          </div>
+          <div className="row g-4 justify-content-center">
+            {agents.map((agent) => generatePropertyAgent(agent))}
+          </div>
         </div>
-    </div>
-    <CallAction/>
-    </> 
+      </div>
+      <CallAction />
+    </>
+  );
 };
-

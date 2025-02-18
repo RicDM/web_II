@@ -1,7 +1,9 @@
 import React from 'react';
-
+import { Header } from "../components/Header";
 export const Contact = () => {
   return (
+    <>
+          <Header /> 
     <div className="container-xxl py-5">
       <div className="container">
         {/* Título e descrição */}
@@ -126,6 +128,7 @@ export const Contact = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

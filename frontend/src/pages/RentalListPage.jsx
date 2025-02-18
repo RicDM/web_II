@@ -1,11 +1,11 @@
 import { RentalList } from '../components/RentalList'
+import { Header } from "../components/Header";
 import { CallAction } from '../components/CallAction'
 
 export const RentalListPage = () => {
-
   return (
     <>
-
+        <Header /> 
         <div id ="atalho" className="container-xxl py-5">
             <div className="container">
                 <div className="row g-0 gx-5 align-items-end">

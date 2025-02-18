@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
+import { Header } from "../components/Header";
 
 export const SingUp = () => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
@@ -14,6 +15,8 @@ export const SingUp = () => {
   const password = watch('password');
 
   return (
+    <>
+      <Header />
     <div className="container-xxl py-5">
       <div className="container">
         <div className="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style={{ maxWidth: '600px' }}>
@@ -111,6 +114,7 @@ export const SingUp = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

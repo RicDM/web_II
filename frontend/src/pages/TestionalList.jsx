@@ -2,6 +2,7 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css'; // Estilos do Swiper
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'; // Módulos do Swiper
+import { Header } from "../components/Header";
 
 // Inicializa os módulos do Swiper
 const swiperModules = [Navigation, Pagination, Autoplay];
@@ -33,6 +34,8 @@ export const TestimonialList = () => {
   ];
 
   return (
+    <>
+      <Header />
     <div className="container-xxl py-5">
       <div className="container">
         {/* Título e descrição */}
@@ -86,5 +89,6 @@ export const TestimonialList = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };

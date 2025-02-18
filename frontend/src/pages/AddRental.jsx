@@ -1,6 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../auth/authContext';
+import { Header } from "../components/Header";
+
 
 export const AddRental = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -17,6 +19,9 @@ export const AddRental = () => {
     }
   };
   return (
+    <>
+      <Header /> 
+
     <div className="container-xxl py-5">
       <div className="container">
         <div className="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style={{ maxWidth: '600px' }}>
@@ -228,6 +233,7 @@ export const AddRental = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 
