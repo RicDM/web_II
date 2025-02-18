@@ -1,10 +1,17 @@
 import { Rental } from "../models/index.js";
+import { ImageLocalProvider } from "../providers/image.provider.js";
 
 export class RentalController {
     static async readAll(req, res) {
         try {
             const rentals = await Rental.find();
-            res.status(200).json(rentals);
+            res.status(200).json(rentals.map(
+                rental => {
+                    const images = ImageLocalProvider.getFileUrl(rental.images, req)
+                    rental.images = images
+                    return rental
+                }
+            ));
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: "Erro ao buscar os imóveis", error });
@@ -32,7 +39,7 @@ export class RentalController {
             if (!req.files || req.files.length === 0) {
                 return res.status(400).json({ error: "Nenhuma imagem foi enviada." });
             }
-            const images = req.files.map(file => file.path)
+            const images = req.files.map(file => file.filename)
             delete newRentalData.files
             const newRental = await Rental.create({ images, ...newRentalData } );
             res.status(201).json({ message: "Imóvel criado com sucesso", rental: newRental });
