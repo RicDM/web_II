@@ -34,6 +34,7 @@ const root = document.getElementById("root");
 
 ReactDOM.createRoot(root).render(
   <BrowserRouter >
+  <AuthProvider>
     <div className="container-xxl bg-white p-0">
       <div className="container-fluid nav-bar bg-transparent" id="com-navbar">
         <NavBar/>
@@ -44,7 +45,7 @@ ReactDOM.createRoot(root).render(
           <SearchRental/>
         </div>
       </div>
-      <AuthProvider>
+      
         <Routes>
 
           <Route path="singup" element={<SingUp/>} />
@@ -63,7 +64,6 @@ ReactDOM.createRoot(root).render(
           </Route>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
-        </AuthProvider>
       <Footer/>
       <a 
       href="#" 
@@ -71,5 +71,6 @@ ReactDOM.createRoot(root).render(
       children={<i className="bi bi-arrow-up"/>}
       />
     </div>
+    </AuthProvider>
   </BrowserRouter>
 );
