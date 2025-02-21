@@ -1,6 +1,0 @@
-model - 
-controller - routes
-
-controller - routes -> route on app with prefixo -> subir o servidor
-
-api - rest
