@@ -1,8 +1,11 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { ImageLocalProvider } from "../providers/image.provider.js";
 
-const dbPath = path.resolve('db.json');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const dbPath = path.join(__dirname, '../../db.json');
 
 const getRentals = () => {
     const data = fs.readFileSync(dbPath, 'utf8');
