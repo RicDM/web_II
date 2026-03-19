@@ -1,26 +1,32 @@
-import axios from 'axios';
-
-const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-
-const api = axios.create({
-    baseURL: `${baseURL}/rental`,
-    timeout: 5000
-});
-
 export const getRentals = async () => {
     try {
-        const response = await api.get('/');
-        return response.data;
+        const response = await fetch('/db.json');
+        if (!response.ok) throw new Error('Erro ao buscar db.json');
+        const data = await response.json();
+        
+        return data.imoveis.map(rental => {
+            const r = { ...rental, _id: rental.id };
+            r.images = (r.imgSrc || []).map(fileName => fileName.startsWith('/') ? fileName : `/${fileName}`);
+            return r;
+        });
     } catch (error) {
-        console.error("Erro ao buscar aluguéis:", error);
+        console.error("Erro ao buscar aluguéis locais:", error);
         return [];
     }
 };
 
 export const getOneRental = async (id) => {
     try {
-        const response = await api.get(`/${id}`);
-        return response.data;
+        const response = await fetch('/db.json');
+        if (!response.ok) throw new Error('Erro ao buscar db.json');
+        const data = await response.json();
+        
+        const rental = data.imoveis.find(r => String(r.id) === String(id));
+        if (!rental) return null;
+
+        const r = { ...rental, _id: rental.id };
+        r.images = (r.imgSrc || []).map(fileName => fileName.startsWith('/') ? fileName : `/${fileName}`);
+        return r;
     } catch (error) {
         console.error(`Erro ao buscar aluguel ${id}:`, error);
         return null;
