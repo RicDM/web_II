@@ -10,7 +10,7 @@ createRoot(document.getElementById('root')).render(
  */
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import App from "./App";
 import { Contact } from "./pages/Contact";
 import { NavBar } from './components/NavBar'
@@ -24,17 +24,11 @@ import { Agents } from "./pages/Agents";
 import { RentalListPage } from "./pages/RentalListPage";
 import { RentalTypesPage } from "./pages/RentalTypesPage";
 import { TestimonialList } from "./pages/TestionalList";
-import { AddRental } from "./pages/AddRental";
-import { SingUp } from "./pages/SingUp";
-import { Login } from "./pages/Login";
-import { ProtectedRoute } from "./auth/ProtectedRoute";
-import { AuthProvider } from "./auth/authContext";
 
 const root = document.getElementById("root");
 
 ReactDOM.createRoot(root).render(
   <BrowserRouter >
-  <AuthProvider>
     <div className="container-xxl bg-white p-0">
       <div className="container-fluid nav-bar bg-transparent" id="com-navbar">
         <NavBar/>
@@ -47,21 +41,18 @@ ReactDOM.createRoot(root).render(
       </div>
       
         <Routes>
+          <Route path="singup" element={<Navigate to="/" replace />} />
+          <Route path="login" element={<Navigate to="/" replace />} />
+          <Route path="newrental" element={<Navigate to="/" replace />} />
 
-          <Route path="singup" element={<SingUp/>} />
-          <Route path="login" element={<Login/>} />
-
-          <Route element={<ProtectedRoute />}>
-            <Route index element={<App />} />
-            <Route path="contact" element={<Contact/>} />
-            <Route path="about" element={<About/>} />
-            <Route path="agents" element={<Agents />}/>
-            <Route path="rentals" element={<RentalListPage/>}/>
-            <Route path="types" element={<RentalTypesPage />}/>
-            <Route path="testimonials" element={<TestimonialList />}/>
-            <Route path="newrental" element={<AddRental />}/>
-            <Route path="rental/:id" element={<RentalInfo />}/>
-          </Route>
+          <Route index element={<App />} />
+          <Route path="contact" element={<Contact/>} />
+          <Route path="about" element={<About/>} />
+          <Route path="agents" element={<Agents />}/>
+          <Route path="rentals" element={<RentalListPage/>}/>
+          <Route path="types" element={<RentalTypesPage />}/>
+          <Route path="testimonials" element={<TestimonialList />}/>
+          <Route path="rental/:id" element={<RentalInfo />}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       <Footer/>
@@ -71,6 +62,5 @@ ReactDOM.createRoot(root).render(
       children={<i className="bi bi-arrow-up"/>}
       />
     </div>
-    </AuthProvider>
   </BrowserRouter>
 );

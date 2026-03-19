@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router';
-import { useAuth } from '../auth/authContext';
+import { getRentals } from '../auth/api';
 
 export const RentalList = () => {
     const [properties, setProperties] = useState([]); // Estado para armazenar as propriedades
     const [statusFilters, setStatusFilters] = useState(["Todas", "Top", "Recentes"]); // Filtros de status
     const [activeStatus, setActiveStatus] = useState(""); // Estado para o filtro ativo
 
-    const { getUser } = useAuth()
-    const userReq = getUser()
     // Função para buscar os dados das propriedades
     const getAllRentals = async () => {
-        const data = await userReq.getRentals()
+        const data = await getRentals()
         return data
         /* return [
             {

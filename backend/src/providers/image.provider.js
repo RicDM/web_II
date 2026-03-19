@@ -3,11 +3,7 @@ export class ImageLocalProvider {
         if (!filesName) {
             throw new Error('Nome do arquivo não pode estar vazio.');
         }
-
-        // Gera a URL completa usando as informações da requisição
-        const serverUrl = `${req.protocol}://${req.get('host')}`;
-
-        // Retorna o caminho completo da imagem
-        return filesName.map(fileName => `${serverUrl}/images/${fileName}`)
+        // Retorna o caminho root-relativo para buscar do frontend/public
+        return filesName.map(fileName => fileName.startsWith('/') ? fileName : `/${fileName}`);
     }
 };

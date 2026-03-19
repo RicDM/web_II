@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css'; // Estilos do Swiper
 import SwiperCore from 'swiper'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { useAuth } from '../auth/authContext';
+import { getOneRental } from '../auth/api';
 console.log(Autoplay)
 // Inicializa os módulos do Swiper
 SwiperCore.use([Navigation, Pagination, Autoplay]);
@@ -16,18 +16,14 @@ export const RentalInfo = () => {
   // Captura o parâmetro "id" da URL
   const { id } = useParams();
 
-  // Função para buscar os dados do aluguel pelo ID
-  const { getUser } = useAuth()
-  const userReq = getUser()
-   
-
-
   // Efeito para carregar os dados do aluguel
   useEffect(() => {
     if (id) {
-      userReq.getOneRental(id).then((rentalData) => {
-        setRental(rentalData);
-        setImages(rentalData.images);
+      getOneRental(id).then((rentalData) => {
+        if (rentalData) {
+          setRental(rentalData);
+          setImages(rentalData.images);
+        }
       });
     }
   }, [id]); // Executa sempre que o "id" mudar
